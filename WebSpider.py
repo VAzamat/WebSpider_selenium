@@ -9,7 +9,8 @@ import requests
 import logging
 
 from selenium import webdriver
-from selenium.webdriver.firefox.options import Options
+import pyautogui
+
 
 main_logger = logging.getLogger(__name__)
 logging.basicConfig(
@@ -29,8 +30,8 @@ firefox_options.set_preference("browser.download.folderList", 2)
 firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/html, application/xhtml+xml")
 
 browser = webdriver.Firefox(firefox_options)
-time.sleep(1)
-browser.close()
+time.sleep(2)
+
 
 def getAllLinks(url, include_only_parent=True):
     filename = os.path.basename(url)
@@ -46,4 +47,21 @@ def getAllLinks(url, include_only_parent=True):
 
 url = os.environ.get('MainSpiderUrl')
 links = getAllLinks(url)
-print( links )
+links.sort()
+
+main_logger.info( links )
+
+for item_url in links:
+    main_logger.info(item_url)
+    browser.get(item_url)
+    time.sleep(2)
+
+    pyautogui.hotkey('ctrl', 's')
+    time.sleep(2)
+
+    filename = os.path.basename(item_url)
+    filename_only = os.path.splitext(filename)[0]
+
+    pyautogui.write(filename_only)
+    pyautogui.press('enter')
+    time.sleep(10)
