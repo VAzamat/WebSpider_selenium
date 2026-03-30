@@ -18,8 +18,8 @@ source .env
 </code>
 
 ## Setup and start
-+ Change in _.env_ the firefox profile variable
-+ Change in the _.env_ firefox save directory 
++ Change _FirefoxProfilePath_ variable in _.env_ the firefox profile variable
++ Change _FirefoxDestDir_ variable  in the _.env_ firefox save directory 
 + Start the program _./WebSpider.py_
 
 <code bash>

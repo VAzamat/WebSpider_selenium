@@ -25,7 +25,11 @@ firefox_options = webdriver.FirefoxOptions()
 firefox_options.add_argument('-profile')
 firefox_options.add_argument(os.environ.get('FirefoxProfilePath'))
 
-firefox_options.set_preference("browser.download.dir", os.environ.get('FirefoxDestDir'))
+destination_directory = os.environ.get('FirefoxDestDir')
+if not os.path.exists(destination_directory):
+    os.makedirs(destination_directory)
+
+firefox_options.set_preference("browser.download.dir", destination_directory)
 firefox_options.set_preference("browser.download.folderList", 2)
 firefox_options.set_preference("browser.helperApps.neverAsk.saveToDisk", "text/html, application/xhtml+xml")
 
