@@ -5,6 +5,16 @@ import os
 from bs4 import BeautifulSoup
 import requests
 
+import logging
+
+main_logger = logging.getLogger(__name__)
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(message)s'
+    )
+
+main_logger.info("запускаю основную программу")
+
 
 def getAllLinks(url, include_only_parent=True):
     filename = os.path.basename(url)
